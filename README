@@ -1,0 +1,76 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=857
+
+The plugin script table_format.vim is a text formatting tool.  It
+arranges words or groups of words on consecutive lines into a neatly
+formatted table.
+
+There are two keyboard shortcuts defined: \t and \T.  Each work
+slightly differently.
+
+- \t (lowercase 't') is referred to as a mode 0 table command.  This
+  means that words separated by a single space are arranged into
+  columns padded with one or more spaces.
+
+- \T (uppercase 'T') is referred to as a mode 1 table command.  Here
+  fields consist of groups of words separated by one space.  The field
+  boundaries are sequences of two or more spaces.  After formatting
+  into a table, the padding between fields (groups of words) is three
+  of more spaces.
+
+- The \t and \T (specifically <Leader>t and <Leader>T) mappings exist
+  for normal and visual mode.  In normal mode the range to be made
+  into a table is from the current line (cursor position) until the
+  next paragraph break (ie blank line).
+
+- For visual mode table formatting works for both linewise visual and
+  blockwise visual modes.  First highlight the text in visual mode
+  with 'V' then movement (linewise visual) or '<c-v>' or '<c-q> then
+  movement (blockwise visual) and then type <Leader>t or <Leader>T (ie
+  \t or \T)
+
+- The \t and \T mappings utilize the vim mapleader variable.  For
+  example, if mapleader=',', then the mappings in table_format.vim are
+  ,t and ,T
+
+- The one-space/one-padding for mode 0 and two-space/three-padding for
+  mode 1 are defaults and can be overridden.
+
+- The internal table formatting functions can be called directly:
+
+    :[range]call Table(space_split, space_padding, max_field_length,
+        col_start, col_end)
+
+  All of the parameters are optional.
+
+    space_split
+        - The number of consecutive spaces that indicate a column
+          boundary
+        - default: 1
+
+    space_padding
+        - The minimum number of spaces that are placed in between
+          fields after formatting to make a column boundary.
+        - default: 1
+
+    max_field_length
+        - The maximum length of a field (word or group of words).  A
+          value of 0 (the default) means that a field can be any
+          length
+        - default: 0
+
+    col_start
+        - The beginning column position for formatting.  A value of 0
+          (the default) means to start at the beginning of the line.
+        - default: 0
+
+    col_end
+        - The end column position for formatting.  A value of 0 (the
+          default) means to format through the end of the line.
+        - default: 0
+
+    There is an alternate version of the above function where the
+    range can be passed in directly:
+
+    :call TableRange(firstline, lastline, space_split, space_padding,
+        max_field_length, col_start, col_end)
+
